@@ -96,20 +96,20 @@ int main(void)
     while (WHBProcIsRunning())
     {
         /* Clear each buffer - the 0x... is an RGBX colour */
-        OSScreenClearBufferEx(SCREEN_TV, 0x0000A000);
-        OSScreenClearBufferEx(SCREEN_DRC, 0x00A00000);
+        OSScreenClearBufferEx(SCREEN_TV, 0x5A5AFF00);
+        OSScreenClearBufferEx(SCREEN_DRC, 0x5A5AFF00);
 
         /* Print some text. Coordinates are (columns, rows). */
-        OSScreenPutFontEx(SCREEN_TV, 0, 0, "Hello, world! This is the TV.");
+        OSScreenPutFontEx(SCREEN_TV, 0, 0, "Henlo World! This is on the TV.");
         OSScreenPutFontEx(SCREEN_TV, 0, 1,
-                          "If you can read this, the homebrew app is working.");
+                          "If you can read this, the homebrew app is working (to some extend).");
         OSScreenPutFontEx(SCREEN_TV, 0, 3,
                           "Press A, B, X, or Y on the GamePad to test input. "
                           "Most output will be on the GamePad screen.");
 
-        OSScreenPutFontEx(SCREEN_DRC, 0, 0, "Hello, world! This is the GamePad.");
+        OSScreenPutFontEx(SCREEN_DRC, 0, 0, "Henlo World! This is on the GamePad.");
         OSScreenPutFontEx(SCREEN_DRC, 0, 1,
-                          "If you can read this, the homebrew app is working.");
+                          "If you can read this, the homebrew app is working (to some extend).");
 
         /* Read button, touch and sensor data from the Gamepad */
         VPADRead(VPAD_CHAN_0, &status, 1, &error);
