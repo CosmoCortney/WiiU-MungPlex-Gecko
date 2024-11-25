@@ -28,10 +28,9 @@ int main(void)
     WHBLogConsoleInit();
 
     /* WHBLogPrint and WHBLogPrintf add new line characters for you */
-    WHBLogPrint("Hello, World! Logging started.");
-    WHBLogPrint("Starting OSScreen in 2 seconds.");
+    WHBLogPrint("MungPlex-Gecko started.");
     WHBLogConsoleDraw();
-    OSSleepTicks(OSMillisecondsToTicks(2000));
+    OSSleepTicks(OSMillisecondsToTicks(500));
 
     /* Init OSScreen. This is the really simple graphics API we'll be using to
     draw some text! Also exit out of WHB console logging. */
@@ -158,7 +157,17 @@ int main(void)
         if (vpad_fatal)
             break;
 
-        /* Check the buttons, and log appropriate messages */
+        OSScreenPutFontEx(SCREEN_DRC, 0, 3, "Press X to exit.");
+
+         if (status.hold & VPAD_BUTTON_X)
+        {
+            WHBLogPrint("X pressed to exit.");
+            OSScreenPutFontEx(SCREEN_DRC, 0, 3, "Exiting");
+            WHBProcShutdown();
+        }
+
+/*
+        // Check the buttons, and log appropriate messages 
         if (status.hold & VPAD_BUTTON_A)
         {
             WHBLogPrint("Pressed A this cycle.");
@@ -217,11 +226,11 @@ int main(void)
         else
         {
             OSScreenPutFontEx(SCREEN_DRC, 0, 6, "Not pressing Y!");
-        }
+        }*/
 
-        /* Check the touch position and write it to the GamePad.
-        Additionally, draw a square at that location. */
-        touchData = status.tpNormal;
+        /* //Check the touch position and write it to the GamePad.
+        //Additionally, draw a square at that location. 
+        //touchData = status.tpNormal;
         if (touchData.touched != 0)
         {
             char touchDataString[50];
@@ -232,15 +241,15 @@ int main(void)
             {
                 for (int y = -10; y < 10; y++)
                 {
-                    /* The pixel's location needs to be mapped from the touch area
-                    of 4000x4000 to the screen area of 854x480. */
+                    // The pixel's location needs to be mapped from the touch area
+                   // of 4000x4000 to the screen area of 854x480. 
                     OSScreenPutPixelEx(SCREEN_DRC, touchData.x / 4.684 + x,
                                        (4000 - touchData.y) / 8.333 + y, 0xF0000000);
                     OSScreenPutPixelEx(SCREEN_TV, touchData.x / 4.684 + x,
                                        (4000 - touchData.y) / 8.333 + y, 0xF0000000);
                 }
             }
-        }
+        }*/
 
         /* Flush all caches - read the tutorial, please! */
         DCFlushRange(tvBuffer, tvBufferSize);

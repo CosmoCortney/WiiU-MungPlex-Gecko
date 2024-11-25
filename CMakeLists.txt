@@ -4,19 +4,19 @@ set(CMAKE_TOOLCHAIN_FILE $ENV{DEVKITPRO}/cmake/WiiU.cmake)
 set(BUILD_DIR "${CMAKE_SOURCE_DIR}/build")
 
 if(NOT EXISTS "${CMAKE_TOOLCHAIN_FILE}")
-    message(ERROR "Toolchain file: ´${CMAKE_TOOLCHAIN_FILE}´ does not exist. Run devkitPro/msys2/usr/bin/pacman -Syu --needed wiiu-dev")
+    message(FATAL_ERROR  "Toolchain file: ´${CMAKE_TOOLCHAIN_FILE}´ does not exist. Run devkitPro/msys2/usr/bin/pacman -Syu --needed wiiu-dev")
     endif()
 
 message(STATUS "Toolchain path: ${CMAKE_TOOLCHAIN_FILE}")
 
-project(MungPlex-Server)
+project(MungPlex-Gecko LANGUAGES C CXX)
 
-add_executable(MungPlex-Server main.cpp)
+add_executable(MungPlex-Gecko main.cpp)
 
-target_compile_options(MungPlex-Server PRIVATE -Wall -Wextra -pedantic)
+target_compile_options(MungPlex-Gecko PRIVATE -Wall -Wextra -pedantic)
 
-wut_create_rpx(MungPlex-Server)
-wut_create_wuhb(MungPlex-Server)
+wut_create_rpx(MungPlex-Gecko)
+wut_create_wuhb(MungPlex-Gecko)
 
 
 
